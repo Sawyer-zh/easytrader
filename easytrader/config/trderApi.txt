@@ -1,0 +1,878 @@
+
+
+
+1.买入/卖出
+url			: https://tradeh5.eastmoney.com/Trade/SubmitTrade
+类型 		: POST
+参数			:
+				stockCode:512000		股票代码
+				price:1.003				股票价格
+				amount:200				买入数量/股
+				tradeType:B				交易类型  //  买入B , 卖出S 
+返回			:
+				{
+					"Message": null,
+					"Status": 0,
+					"Data": [{
+						"Wtbh": "630"	委托编号
+					}]
+				}
+
+2.验证机制 推测 Uuid 传过去即可
+cookie
+Uid 		: 用户id加密生成		ma6slPcP4zv0ezS55bqWSg==
+UserNm		: 姓名urlecode		%e5%bc%a0%e8%88%aa   页面显示用
+Uuid		: SessionID 		ab534bc66752495dace6769e9aca3c80
+
+3.我的资产
+url 		: https://tradeh5.eastmoney.com/Assets/GetMyAssests
+类型			: POST
+参数			:
+返回			:
+				{
+					"Message": null,
+					"Status": 0,
+					"Data": [{
+						"RMBZzc": "84972.72",		人民币总资产		
+						"Zzc": "84972.72",			总资产
+						"Zxsz": "84971.62",			总市值
+						"Kyzj": "47717.12",			可用资金
+						"Kqzj": "1.10",				可取资金
+						"Djzj": "0.00",				
+						"Zjye": "1.10",
+						"Money_type": "RMB",
+						"Drckyk": null,
+						"Ljyk": null
+					}]
+				}
+
+
+
+
+4.登录
+url			: https://tradeh5.eastmoney.com/Login/Authentication
+类型			: POST
+参数			:
+			userId: 541000077676
+			password: 明文密码
+			identifyCode:图形验证码
+			randNumber:0.0496264784669731
+			type:Z 			账户类型
+			holdOnlineIdx:1  保持在线时间
+
+4.图形验证码
+url 		: https://tradeh5.eastmoney.com/LogIn/YZM?randNum=0.256393933954153
+
+4.获得Uuid
+url			: https://tradeh5.eastmoney.com/LogIn/IsNeedValidCode
+
+
+
+
+
+
+5.持仓
+url			: "https://tradeh5.eastmoney.com/Trade/GetMyStockList?pgSize=&dwc="
+类型			: POST
+
+返回			:
+				{
+					"Message": null,
+					"Status": 0,
+					"Data": [{
+						"Zqdm": "128032",
+						"Zqmc": "双环转债",
+						"Zqsl": "10",
+						"Kysl": "10",
+						"Djsl": "0",
+						"Cbjg": "100.000",
+						"Zxjg": "0.000",
+						"Ykbl": "-1.000000",
+						"Ljyk": "0.00",
+						"Zxsz": "0.00",
+						"Market": "SA",
+						"Gddm": "0220675918",
+						"Dwc": "",
+						"Qqhs": null,
+						"Cwbl": null
+					}, {
+						"Zqdm": "164906",
+						"Zqmc": "中国互联",
+						"Zqsl": "1500",
+						"Kysl": "1500",
+						"Djsl": "0",
+						"Cbjg": "1.486",
+						"Zxjg": "1.492",
+						"Ykbl": "0.004038",
+						"Ljyk": "8.95",
+						"Zxsz": "2238.00",
+						"Market": "SA",
+						"Gddm": "0220675918",
+						"Dwc": "",
+						"Qqhs": null,
+						"Cwbl": null
+					}, {
+						"Zqdm": "501029",
+						"Zqmc": "红利基金",
+						"Zqsl": "12200",
+						"Kysl": "12100",
+						"Djsl": "0",
+						"Cbjg": "0.946",
+						"Zxjg": "1.154",
+						"Ykbl": "0.219873",
+						"Ljyk": "2543.20",
+						"Zxsz": "14078.80",
+						"Market": "HA",
+						"Gddm": "A722222804",
+						"Dwc": "",
+						"Qqhs": null,
+						"Cwbl": null
+					}, {
+						"Zqdm": "512000",
+						"Zqmc": "券商ETF",
+						"Zqsl": "19000",
+						"Kysl": "18700",
+						"Djsl": "0",
+						"Cbjg": "0.946",
+						"Zxjg": "1.002",
+						"Ykbl": "0.059197",
+						"Ljyk": "1072.68",
+						"Zxsz": "19038.00",
+						"Market": "HA",
+						"Gddm": "A722222804",
+						"Dwc": "A72222280454101512000",
+						"Qqhs": null,
+						"Cwbl": null
+					}]
+				}
+
+6.当日成交
+url			: https://tradeh5.eastmoney.com/Search/GetDealData
+方式			: POST
+参数			:
+				qqhs:20
+				dwc:
+返回			: 
+				{
+					"Message": null,
+					"Status": 0,
+					"Data": []
+				}
+
+7.当日委托
+url			: https://tradeh5.eastmoney.com/Search/GetOrdersData
+方式			: POST
+参数			: 
+				qqhs:20
+				dwc:
+返回			: 
+				{
+					"Message": null,
+					"Status": 0,
+					"Data": [{
+						"Wtsj": "110351",
+						"Zqdm": "512000",
+						"Zqmc": "券商ETF",
+						"Mmsm": "证券买入",
+						"Wtsl": "200",
+						"Wtzt": "未报",
+						"Wtjg": "1.003",
+						"Cjsl": "0",
+						"Cjje": ".00",
+						"Cjjg": "0.000000",
+						"Market": "HA",
+						"Wtbh": "506",
+						"Gddm": "A722222804",
+						"Kcbz": null,
+						"Dwc": "",
+						"Qqhs": null,
+						"Wtrq": "20180122"
+					}, {
+						"Wtsj": "110820",
+						"Zqdm": "512000",
+						"Zqmc": "券商ETF",
+						"Mmsm": "证券卖出",
+						"Wtsl": "100",
+						"Wtzt": "未报",
+						"Wtjg": "1.002",
+						"Cjsl": "0",
+						"Cjje": ".00",
+						"Cjjg": "0.000000",
+						"Market": "HA",
+						"Wtbh": "517",
+						"Gddm": "A722222804",
+						"Kcbz": null,
+						"Dwc": "",
+						"Qqhs": null,
+						"Wtrq": "20180122"
+					}, {
+						"Wtsj": "113632",
+						"Zqdm": "512000",
+						"Zqmc": "券商ETF",
+						"Mmsm": "证券买入",
+						"Wtsl": "200",
+						"Wtzt": "未报",
+						"Wtjg": "1.000",
+						"Cjsl": "0",
+						"Cjje": ".00",
+						"Cjjg": "0.000000",
+						"Market": "HA",
+						"Wtbh": "600",
+						"Gddm": "A722222804",
+						"Kcbz": null,
+						"Dwc": "",
+						"Qqhs": null,
+						"Wtrq": "20180122"
+					},{
+						"Wtsj": "125238",
+						"Zqdm": "501029",
+						"Zqmc": "红利基金",
+						"Mmsm": "证券卖出",
+						"Wtsl": "100",
+						"Wtzt": "未报",
+						"Wtjg": "1.156",
+						"Cjsl": "0",
+						"Cjje": ".00",
+						"Cjjg": "0.000000",
+						"Market": "HA",
+						"Wtbh": "639",
+						"Gddm": "A722222804",
+						"Kcbz": null,
+						"Dwc": "20180122|639",
+						"Qqhs": null,
+						"Wtrq": "20180122"
+					}]
+				}
+			  
+8.历史成交
+url			: https://tradeh5.eastmoney.com/Search/GetHisDealData
+类型			: POST
+参数			:
+				st:2018-01-14
+				et:2018-01-21
+				qqhs:20
+				dwc:
+返回			:
+				{
+					"Message": null,
+					"Status": 0,
+					"Data": [{
+						"Cjrq": "20180115",
+						"Cjsj": "100607",
+						"Cjsj2": "100607",
+						"Zqdm": "113017",
+						"Zqmc": "N吉视转",
+						"Mmsm": "证券卖出",
+						"Cjjg": "99.640",
+						"Cjsl": "10",
+						"Cjje": "996.40",
+						"Sxf": ".20",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Zjye": "-19212.92",
+						"Gfye": "0",
+						"Market": "HA",
+						"Cjbh": "3692625",
+						"Wtbh": "117499",
+						"Gddm": "A722222804",
+						"Dwc": "",
+						"Qqhs": null
+					}, {
+						"Cjrq": "20180115",
+						"Cjsj": "100622",
+						"Cjsj2": "100622",
+						"Zqdm": "110042",
+						"Zqmc": "N航电转",
+						"Mmsm": "证券卖出",
+						"Cjjg": "103.000",
+						"Cjsl": "30",
+						"Cjje": "3090.00",
+						"Sxf": ".62",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Zjye": "-16123.54",
+						"Gfye": "0",
+						"Market": "HA",
+						"Cjbh": "3708998",
+						"Wtbh": "118022",
+						"Gddm": "A722222804",
+						"Dwc": "",
+						"Qqhs": null
+					}, {
+						"Cjrq": "20180115",
+						"Cjsj": "101146",
+						"Cjsj2": "101146",
+						"Zqdm": "600004",
+						"Zqmc": "白云机场",
+						"Mmsm": "证券卖出",
+						"Cjjg": "15.440",
+						"Cjsl": "700",
+						"Cjje": "10808.00",
+						"Sxf": "5.00",
+						"Yhs": "10.81",
+						"Ghf": ".22",
+						"Zjye": "-5331.57",
+						"Gfye": "0",
+						"Market": "HA",
+						"Cjbh": "4029287",
+						"Wtbh": "126440",
+						"Gddm": "A722222804",
+						"Dwc": "",
+						"Qqhs": null
+					}, {
+						"Cjrq": "20180115",
+						"Cjsj": "102530",
+						"Cjsj2": "102530",
+						"Zqdm": "501050",
+						"Zqmc": "50AH",
+						"Mmsm": "证券卖出",
+						"Cjjg": "1.270",
+						"Cjsl": "4200",
+						"Cjje": "5334.00",
+						"Sxf": "1.33",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Zjye": "1.10",
+						"Gfye": "0",
+						"Market": "HA",
+						"Cjbh": "4834221",
+						"Wtbh": "135914",
+						"Gddm": "A722222804",
+						"Dwc": "",
+						"Qqhs": null
+					}, {
+						"Cjrq": "20180116",
+						"Cjsj": "093009",
+						"Cjsj2": "093009",
+						"Zqdm": "128029",
+						"Zqmc": "太阳转债",
+						"Mmsm": "证券卖出",
+						"Cjjg": "114.000",
+						"Cjsl": "10",
+						"Cjje": "1140.00",
+						"Sxf": ".23",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Zjye": "1.10",
+						"Gfye": "0",
+						"Market": "SA",
+						"Cjbh": "0104000000438538",
+						"Wtbh": "14274",
+						"Gddm": "0220675918",
+						"Dwc": "",
+						"Qqhs": null
+					}, {
+						"Cjrq": "20180119",
+						"Cjsj": "133821",
+						"Cjsj2": "133821",
+						"Zqdm": "128028",
+						"Zqmc": "赣锋转债",
+						"Mmsm": "证券卖出",
+						"Cjjg": "101.220",
+						"Cjsl": "20",
+						"Cjje": "2024.40",
+						"Sxf": ".40",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Zjye": "1.10",
+						"Gfye": "0",
+						"Market": "SA",
+						"Cjbh": "0102000009181318",
+						"Wtbh": "249476",
+						"Gddm": "0220675918",
+						"Dwc": "20180119|153834",
+						"Qqhs": null
+					}]
+				}
+
+9.历史委托
+url			: https://tradeh5.eastmoney.com/Search/GetHisOrdersData
+类型			: POST
+参数			: 
+				st:2018-01-14
+				et:2018-01-21
+				qqhs:20
+				dwc:
+返回			:
+				{
+					"Message": null,
+					"Status": 0,
+					"Data": [{
+						"Wtrq": "20180115",
+						"Wtsj": "10060307",
+						"Zqdm": "113017",
+						"Zqmc": "N吉视转",
+						"Wtsj2": "100603",
+						"Mmsm": "证券卖出",
+						"Wtsl": "10",
+						"Wtzt": "已成",
+						"Wtjg": "99.640",
+						"Cjsl": "10",
+						"Cjje": "996.40",
+						"Cjjg": "99.6400000000000",
+						"Market": "HA",
+						"Wtbh": "117499",
+						"Gddm": "A722222804",
+						"Dwc": "",
+						"Qqhs": null
+					}, {
+						"Wtrq": "20180115",
+						"Wtsj": "10062170",
+						"Zqdm": "110042",
+						"Zqmc": "N航电转",
+						"Wtsj2": "100621",
+						"Mmsm": "证券卖出",
+						"Wtsl": "30",
+						"Wtzt": "已成",
+						"Wtjg": "103.000",
+						"Cjsl": "30",
+						"Cjje": "3090.00",
+						"Cjjg": "103.0000000000000",
+						"Market": "HA",
+						"Wtbh": "118022",
+						"Gddm": "A722222804",
+						"Dwc": "",
+						"Qqhs": null
+					}, {
+						"Wtrq": "20180115",
+						"Wtsj": "10114568",
+						"Zqdm": "600004",
+						"Zqmc": "白云机场",
+						"Wtsj2": "101145",
+						"Mmsm": "证券卖出",
+						"Wtsl": "700",
+						"Wtzt": "已成",
+						"Wtjg": "15.440",
+						"Cjsl": "700",
+						"Cjje": "10808.00",
+						"Cjjg": "15.4400000000000",
+						"Market": "HA",
+						"Wtbh": "126440",
+						"Gddm": "A722222804",
+						"Dwc": "",
+						"Qqhs": null
+					}, {
+						"Wtrq": "20180115",
+						"Wtsj": "10183572",
+						"Zqdm": "501050",
+						"Zqmc": "50AH",
+						"Wtsj2": "101835",
+						"Mmsm": "证券卖出",
+						"Wtsl": "4200",
+						"Wtzt": "已成",
+						"Wtjg": "1.270",
+						"Cjsl": "4200",
+						"Cjje": "5334.00",
+						"Cjjg": "1.2700000000000",
+						"Market": "HA",
+						"Wtbh": "135914",
+						"Gddm": "A722222804",
+						"Dwc": "",
+						"Qqhs": null
+					}, {
+						"Wtrq": "20180116",
+						"Wtsj": "09280430",
+						"Zqdm": "128029",
+						"Zqmc": "太阳转债",
+						"Wtsj2": "092804",
+						"Mmsm": "证券卖出",
+						"Wtsl": "10",
+						"Wtzt": "已成",
+						"Wtjg": "113.000",
+						"Cjsl": "10",
+						"Cjje": "1140.00",
+						"Cjjg": "114.0000000000000",
+						"Market": "SA",
+						"Wtbh": "14274",
+						"Gddm": "0220675918",
+						"Dwc": "",
+						"Qqhs": null
+					}, {
+						"Wtrq": "20180119",
+						"Wtsj": "09314935",
+						"Zqdm": "783128",
+						"Zqmc": "常熟发债",
+						"Wtsj2": "093149",
+						"Mmsm": "配售申购",
+						"Wtsl": "10000",
+						"Wtzt": "已报",
+						"Wtjg": "100.000",
+						"Cjsl": "0",
+						"Cjje": ".00",
+						"Cjjg": ".0000000000000",
+						"Market": "HA",
+						"Wtbh": "23963",
+						"Gddm": "A722222804",
+						"Dwc": "",
+						"Qqhs": null
+					}, {
+						"Wtrq": "20180119",
+						"Wtsj": "13382028",
+						"Zqdm": "128028",
+						"Zqmc": "赣锋转债",
+						"Wtsj2": "133820",
+						"Mmsm": "证券卖出",
+						"Wtsl": "20",
+						"Wtzt": "已成",
+						"Wtjg": "101.200",
+						"Cjsl": "20",
+						"Cjje": "2024.40",
+						"Cjjg": "101.2200000000000",
+						"Market": "SA",
+						"Wtbh": "249476",
+						"Gddm": "0220675918",
+						"Dwc": "20180119|249476",
+						"Qqhs": null
+					}]
+				}
+
+10.交割单
+url			: https://tradeh5.eastmoney.com/Search/GetWaterBill
+类型			: POST
+参数			:
+				st:2018-01-14
+				et:2018-01-21
+				qqhs:20
+				dwc:
+返回			:
+				{
+					"Message": null,
+					"Status": 0,
+					"Data": [{
+						"Fsrq": "20180115",
+						"Fssj": "19061378",
+						"Zqdm": "004896",
+						"Zqmc": "鹏华兴鑫宝货币",
+						"Ywsm": "基金申购拨出",
+						"Cjsl": "0",
+						"Cjjg": ".000",
+						"Cjje": ".00",
+						"Sxf": ".00",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Gfye": "0",
+						"Zjye": "-20209.12",
+						"Cjbh": "",
+						"Gddm": "061044580719",
+						"Htbh": "",
+						"Market": "J",
+						"Dwc": "",
+						"Qqhs": null,
+						"Fsje": "-20210.12",
+						"Qsrq": "20180115",
+						"Ywrq": "20180115",
+						"Ywdm": "240509",
+						"Jsxf": ".00",
+						"Jygf": ".00"
+					}, {
+						"Fsrq": "20180115",
+						"Fssj": "10060307",
+						"Zqdm": "113017",
+						"Zqmc": "N吉视转",
+						"Ywsm": "证券卖出",
+						"Cjsl": "10",
+						"Cjjg": "99.640",
+						"Cjje": "996.40",
+						"Sxf": ".20",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Gfye": "0",
+						"Zjye": "-19212.92",
+						"Cjbh": "3692625",
+						"Gddm": "A722222804",
+						"Htbh": "1530020919",
+						"Market": "HA",
+						"Dwc": "",
+						"Qqhs": null,
+						"Fsje": "996.20",
+						"Qsrq": "20180115",
+						"Ywrq": "20180115",
+						"Ywdm": "221001",
+						"Jsxf": ".20",
+						"Jygf": ".00"
+					}, {
+						"Fsrq": "20180115",
+						"Fssj": "10062170",
+						"Zqdm": "110042",
+						"Zqmc": "N航电转",
+						"Ywsm": "证券卖出",
+						"Cjsl": "30",
+						"Cjjg": "103.000",
+						"Cjje": "3090.00",
+						"Sxf": ".62",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Gfye": "0",
+						"Zjye": "-16123.54",
+						"Cjbh": "3708998",
+						"Gddm": "A722222804",
+						"Htbh": "1530021017",
+						"Market": "HA",
+						"Dwc": "",
+						"Qqhs": null,
+						"Fsje": "3089.38",
+						"Qsrq": "20180115",
+						"Ywrq": "20180115",
+						"Ywdm": "221001",
+						"Jsxf": ".62",
+						"Jygf": ".00"
+					}, {
+						"Fsrq": "20180115",
+						"Fssj": "10114568",
+						"Zqdm": "600004",
+						"Zqmc": "白云机场",
+						"Ywsm": "证券卖出",
+						"Cjsl": "700",
+						"Cjjg": "15.440",
+						"Cjje": "10808.00",
+						"Sxf": "5.00",
+						"Yhs": "10.81",
+						"Ghf": ".22",
+						"Gfye": "0",
+						"Zjye": "-5331.57",
+						"Cjbh": "4029287",
+						"Gddm": "A722222804",
+						"Htbh": "1530022532",
+						"Market": "HA",
+						"Dwc": "",
+						"Qqhs": null,
+						"Fsje": "10791.97",
+						"Qsrq": "20180115",
+						"Ywrq": "20180115",
+						"Ywdm": "221001",
+						"Jsxf": "4.25",
+						"Jygf": ".00"
+					}, {
+						"Fsrq": "20180115",
+						"Fssj": "10183572",
+						"Zqdm": "501050",
+						"Zqmc": "50AH",
+						"Ywsm": "证券卖出",
+						"Cjsl": "4200",
+						"Cjjg": "1.270",
+						"Cjje": "5334.00",
+						"Sxf": "1.33",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Gfye": "0",
+						"Zjye": "1.10",
+						"Cjbh": "4834221",
+						"Gddm": "A722222804",
+						"Htbh": "1530024270",
+						"Market": "HA",
+						"Dwc": "",
+						"Qqhs": null,
+						"Fsje": "5332.67",
+						"Qsrq": "20180115",
+						"Ywrq": "20180115",
+						"Ywdm": "221001",
+						"Jsxf": "1.09",
+						"Jygf": ".00"
+					}, {
+						"Fsrq": "20180116",
+						"Fssj": "9173358",
+						"Zqdm": "",
+						"Zqmc": "",
+						"Ywsm": "银行转证券",
+						"Cjsl": "0",
+						"Cjjg": ".000",
+						"Cjje": ".00",
+						"Sxf": ".00",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Gfye": "0",
+						"Zjye": "8001.10",
+						"Cjbh": "0",
+						"Gddm": "",
+						"Htbh": "",
+						"Market": "",
+						"Dwc": "",
+						"Qqhs": null,
+						"Fsje": "8000.00",
+						"Qsrq": "20180116",
+						"Ywrq": "20180116",
+						"Ywdm": "160021",
+						"Jsxf": ".00",
+						"Jygf": ".00"
+					}, {
+						"Fsrq": "20180116",
+						"Fssj": "18565874",
+						"Zqdm": "004896",
+						"Zqmc": "鹏华兴鑫宝货币",
+						"Ywsm": "基金申购拨出",
+						"Cjsl": "0",
+						"Cjjg": ".000",
+						"Cjje": ".00",
+						"Sxf": ".00",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Gfye": "0",
+						"Zjye": "-1138.67",
+						"Cjbh": "",
+						"Gddm": "061044580719",
+						"Htbh": "",
+						"Market": "J",
+						"Dwc": "",
+						"Qqhs": null,
+						"Fsje": "-9139.77",
+						"Qsrq": "20180116",
+						"Ywrq": "20180116",
+						"Ywdm": "240509",
+						"Jsxf": ".00",
+						"Jygf": ".00"
+					}, {
+						"Fsrq": "20180116",
+						"Fssj": "9280430",
+						"Zqdm": "128029",
+						"Zqmc": "太阳转债",
+						"Ywsm": "证券卖出",
+						"Cjsl": "10",
+						"Cjjg": "114.000",
+						"Cjje": "1140.00",
+						"Sxf": ".23",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Gfye": "0",
+						"Zjye": "1.10",
+						"Cjbh": "0104000000438538",
+						"Gddm": "0220675918",
+						"Htbh": "I2004103",
+						"Market": "SA",
+						"Dwc": "",
+						"Qqhs": null,
+						"Fsje": "1139.77",
+						"Qsrq": "20180116",
+						"Ywrq": "20180116",
+						"Ywdm": "221001",
+						"Jsxf": ".18",
+						"Jygf": ".00"
+					}, {
+						"Fsrq": "20180117",
+						"Fssj": "19385728",
+						"Zqdm": "004896",
+						"Zqmc": "鹏华兴鑫宝货币",
+						"Ywsm": "基金申购拨出",
+						"Cjsl": "0",
+						"Cjjg": ".000",
+						"Cjje": ".00",
+						"Sxf": ".00",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Gfye": "0",
+						"Zjye": "1.00",
+						"Cjbh": "",
+						"Gddm": "061044580719",
+						"Htbh": "",
+						"Market": "J",
+						"Dwc": "",
+						"Qqhs": null,
+						"Fsje": "-.10",
+						"Qsrq": "20180117",
+						"Ywrq": "20180117",
+						"Ywdm": "240509",
+						"Jsxf": ".00",
+						"Jygf": ".00"
+					}, {
+						"Fsrq": "20180119",
+						"Fssj": "13070444",
+						"Zqdm": "",
+						"Zqmc": "",
+						"Ywsm": "银行转证券",
+						"Cjsl": "0",
+						"Cjjg": ".000",
+						"Cjje": ".00",
+						"Sxf": ".00",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Gfye": "0",
+						"Zjye": "13001.00",
+						"Cjbh": "0",
+						"Gddm": "",
+						"Htbh": "",
+						"Market": "",
+						"Dwc": "",
+						"Qqhs": null,
+						"Fsje": "13000.00",
+						"Qsrq": "20180119",
+						"Ywrq": "20180119",
+						"Ywdm": "160021",
+						"Jsxf": ".00",
+						"Jygf": ".00"
+					}, {
+						"Fsrq": "20180119",
+						"Fssj": "18442689",
+						"Zqdm": "004896",
+						"Zqmc": "鹏华兴鑫宝货币",
+						"Ywsm": "基金申购拨出",
+						"Cjsl": "0",
+						"Cjjg": ".000",
+						"Cjje": ".00",
+						"Sxf": ".00",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Gfye": "0",
+						"Zjye": "-2022.90",
+						"Cjbh": "",
+						"Gddm": "061044580719",
+						"Htbh": "",
+						"Market": "J",
+						"Dwc": "",
+						"Qqhs": null,
+						"Fsje": "-15023.90",
+						"Qsrq": "20180119",
+						"Ywrq": "20180119",
+						"Ywdm": "240509",
+						"Jsxf": ".00",
+						"Jygf": ".00"
+					}, {
+						"Fsrq": "20180119",
+						"Fssj": "13382028",
+						"Zqdm": "128028",
+						"Zqmc": "赣锋转债",
+						"Ywsm": "证券卖出",
+						"Cjsl": "20",
+						"Cjjg": "101.220",
+						"Cjje": "2024.40",
+						"Sxf": ".40",
+						"Yhs": ".00",
+						"Ghf": ".00",
+						"Gfye": "0",
+						"Zjye": "1.10",
+						"Cjbh": "0102000009181318",
+						"Gddm": "0220675918",
+						"Htbh": "I2060580",
+						"Market": "SA",
+						"Dwc": "20180119|153834",
+						"Qqhs": null,
+						"Fsje": "2024.00",
+						"Qsrq": "20180119",
+						"Ywrq": "20180119",
+						"Ywdm": "221001",
+						"Jsxf": ".32",
+						"Jygf": ".00"
+					}]
+				}
+
+11.申购额度
+url			: https://tradeh5.eastmoney.com/Search/GetNewStockQuota
+方式			: POST
+返回			:
+				{
+					"Message": null,
+					"Status": 0,
+					"Data": [{
+						"Gddm": "A722222804",
+						"Market": "HA",
+						"Ksgsz": "0",
+						"Dwc": "4|1|0000292255",
+						"Qqhs": null
+					}, {
+						"Gddm": "0220675918",
+						"Market": "SA",
+						"Ksgsz": null,
+						"Dwc": null,
+						"Qqhs": null
+					}]
+				}
+
+12.
