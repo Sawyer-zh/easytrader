@@ -4,43 +4,48 @@
 import easytrader
 ```
 
-**设置账户**:
-
-** 银河客户端**
-
-```python
-user = easytrader.use('yh_client') # 银河客户端支持 ['yh_client', '银河客户端']
-```
-** 华泰客户端**
-```python
-user = easytrader.use('ht_client') # 华泰客户端支持 ['ht_client', '华泰客户端']
-```
-
-**雪球**
-
- 雪球配置中 `username` 为邮箱, `account` 为手机, 填两者之一即可，另一项改为 `""`, 密码直接填写登录的明文密码即可，不需要抓取 `POST` 的密码
+# 设置券商类型
 
 **银河客户端**
 
-银河客户端直接使用明文的账号和密码即可
-
+```python
+user = easytrader.use('yh_client')
+```
 **华泰客户端**
 
-华泰客户端直接使用明文账号、交易密码及通讯密码
+```python
+user = easytrader.use('ht_client')
+```
 
-# 登录帐号
+**国金客户端**
+
+```python
+user = easytrader.use('gj_client') 
+```
+
+**通用同花顺客户端**
+
+
+```python
+user = easytrader.use('ths')
+```
+
+注: 通用同花顺客户端是指对应券商官网提供的基于同花顺修改的软件版本，类似银河的双子星(同花顺版本), 海王星(通达信版本)
+
+
+# 设置账户信息
 
 登陆账号有两种方式，`使用参数` 和 `使用配置文件`
 
-** 参数登录(推荐)**
+使用通用同花顺客户端不支持自动登陆，所以无需设置，参看下文`直接连接通用同花顺客户端`
+
+**参数登录(推荐)**
 
 ```
 user.prepare(user='用户名', password='雪球、银河客户端为明文密码', comm_password='华泰通讯密码，其他券商不用')
 ```
 
-**注:**雪球额外有个 account 参数，见上文介绍
-
-** 使用配置文件**
+**使用配置文件**
 
 ```python
 user.prepare('/path/to/your/yh_client.json') // 配置文件路径
@@ -48,14 +53,14 @@ user.prepare('/path/to/your/yh_client.json') // 配置文件路径
 
 **注**: 使用配置文件模式, 配置文件需要自己用编辑器编辑生成, 请勿使用记事本, 推荐使用 [notepad++](https://notepad-plus-plus.org/zh/) 或者 [sublime text](http://www.sublimetext.com/)
 
-*格式如下*
+**格式如下**
 
-银河客户端
+银河/国金客户端
 
 ```
 {
-  "user": "银河用户名",
-  "password": "银河明文密码"
+  "user": "用户名",
+  "password": "明文密码"
 }
 
 ```
@@ -70,6 +75,15 @@ user.prepare('/path/to/your/yh_client.json') // 配置文件路径
 }
 
 ```
+
+# 直接连接通用同花顺客户端
+
+需要先手动登陆客户端到交易窗口，然后运用下面的代码连接交易窗口
+
+```python
+user.connect(r'客户端xiadan.exe路径') # 类似 r'C:\htzqzyb2\xiadan.exe' 
+```
+
 
 ### 交易相关
 
@@ -242,6 +256,27 @@ print(ipo_data)
 user.exit()
 ```
 
+### 远端服务器模式
+
+#### 在服务器上启动服务
+
+```python
+from easytrader import server
+
+server.run(port=1430) # 默认端口为 1430
+```
+
+#### 远程客户端调用
+
+```python
+from easytrader import remoteclient
+
+user = remoteclient.use('使用客户端类型，可选 yh_client, ht_client 等', host='服务器ip', port='服务器端口，默认为1430')
+
+其他用法同上
+```
+
+
 #### 雪球组合调仓
 
 ```python
@@ -338,7 +373,6 @@ follower.follow(***, entrust_prop='market')
 ```
 follower.follow(***, send_interval=30) # 设置下单间隔为 30 s
 ```
-
 
 ### 命令行模式
 
