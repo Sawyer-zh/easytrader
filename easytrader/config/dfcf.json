@@ -1,14 +1,19 @@
 {
-  "api_trade":"https://tradeh5.eastmoney.com/Trade/SubmitTrade",
-  "api_asset":"https://tradeh5.eastmoney.com/Assets/GetMyAssests",
-  "api_login":"https://tradeh5.eastmoney.com/Login/Authentication",
-  "api_uuid":"https://tradeh5.eastmoney.com/LogIn/IsNeedValidCode",
-  "api_verify":"https://tradeh5.eastmoney.com/LogIn/YZM?randNum=%s",
-  "api_position":"https://tradeh5.eastmoney.com/Trade/GetMyStockList?pgSize=&dwc=",
-  "api_current_deal":"https://tradeh5.eastmoney.com/Search/GetDealData",
-  "api_current_entrust":"https://tradeh5.eastmoney.com/Search/GetOrdersData",
-  "api_history_deal":"https://tradeh5.eastmoney.com/Search/GetHisDealData",
-  "api_history_entrust":"https://tradeh5.eastmoney.com/Search/GetHisOrdersData",
-  "api_water_bill":"https://tradeh5.eastmoney.com/Search/GetWaterBill",
-  "api_new_stock_quota":"https://tradeh5.eastmoney.com/Search/GetNewStockQuota"
+  "prefix": "https://tradeh5.eastmoney.com/",
+  "api_trade": "https://tradeh5.eastmoney.com/Trade/SubmitTrade",
+  "api_asset": "https://tradeh5.eastmoney.com/Assets/GetMyAssests",
+  "api_login": "https://tradeh5.eastmoney.com/Login/Authentication",
+  "api_uuid": "https://tradeh5.eastmoney.com/LogIn/IsNeedValidCode",
+  "api_verify": "https://tradeh5.eastmoney.com/LogIn/YZM?randNum=%s",
+  "api_position": "https://tradeh5.eastmoney.com/Trade/GetMyStockList?pgSize=&dwc=",
+  "api_current_deal": "https://tradeh5.eastmoney.com/Search/GetDealData",
+  "api_current_entrust": "https://tradeh5.eastmoney.com/Search/GetOrdersData",
+  "api_history_deal": "https://tradeh5.eastmoney.com/Search/GetHisDealData",
+  "api_history_entrust": "https://tradeh5.eastmoney.com/Search/GetHisOrdersData",
+  "api_water_bill": "https://tradeh5.eastmoney.com/Search/GetWaterBill",
+  "api_new_stock_quota": "https://tradeh5.eastmoney.com/Search/GetNewStockQuota",
+  "balance": {
+    "controller": "Assets",
+    "action": "GetMyAssests"
+  }
 }

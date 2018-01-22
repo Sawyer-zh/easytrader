@@ -10,4 +10,8 @@ pytesseract
 pandas
 pyperclip
 rqopen-client
+<<<<<<< Updated upstream
 easyutils
+=======
+
+>>>>>>> Stashed changes

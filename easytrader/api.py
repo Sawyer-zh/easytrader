@@ -6,8 +6,11 @@ from .log import log
 from .ricequant_follower import RiceQuantFollower
 from .xq_follower import XueQiuFollower
 from .xqtrader import XueQiuTrader
+from .dfcf_trader import DFCFTrader
 
 
+
+# **表示提供一个keyword args 字典  *则不一样
 def use(broker, debug=True, **kwargs):
     """用于生成特定的券商对象
     :param broker:券商名支持 ['yh_client', '银河客户端'] ['ht_client', '华泰客户端']
@@ -25,6 +28,8 @@ def use(broker, debug=True, **kwargs):
         log.setLevel(logging.INFO)
     elif broker.lower() in ['xq', '雪球']:
         return XueQiuTrader(**kwargs)
+    elif broker.lower() in ['dfcf','东方财富']:
+        return DFCFTrader()
     elif broker.lower() in ['yh_client', '银河客户端']:
         from .yh_clienttrader import YHClientTrader
         return YHClientTrader()

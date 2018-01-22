@@ -49,7 +49,7 @@ loginParms={
 
 r3 = sess.post(api_login,data=loginParms)
 
-r4 = sess.post(api_asset);
+r4 = sess.post(api_asset)
 
 print(r4.content)
 
