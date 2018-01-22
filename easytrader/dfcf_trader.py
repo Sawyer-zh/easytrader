@@ -13,8 +13,8 @@ class DFCFTrader(WebTrader):
     '''初始化'''
 
     def __init__(self):
-        super(DFCFTrader, self).__init__()
         self.session = requests.Session()
+        super(DFCFTrader, self).__init__(debug=False)
 
     def _prepare_account(self, user, password, **kwargs):
         self.account_config['user'] = user
@@ -28,11 +28,11 @@ class DFCFTrader(WebTrader):
 
     def login(self):
         ret = self._get_uuid()
-        if ret != 1:
+        if ret != "1":
             raise NotLoginError
         self._get_verify_code()
-        identifyCode = input('请在程序执行目录下找到verify.png文件,并输入验证码:')
-        loginParms = {
+        identifyCode = str(input('请在程序执行目录下找到verify.png文件,并输入验证码:'))
+        loginParams = {
             'userId': self.account_config['user'],
             'password': self.account_config['password'],
             'identifyCode': identifyCode,
@@ -40,8 +40,9 @@ class DFCFTrader(WebTrader):
             'type': 'Z',
             'holdOnlineIdx': '1'
         }
-        loginRet = self.session.post(self.config['api_login'],data=loginParms)
-
+        loginRet = self.session.post(self.config['api_login'], data=loginParams)
+        if loginRet.json()['Status'] == 0:
+            return True
 
     def _get_uuid(self):
         ret = self.session.post(self.config['api_uuid'])
@@ -49,14 +50,17 @@ class DFCFTrader(WebTrader):
 
     def _get_verify_code(self):
         self.randNumber = random.random()
-        ret = self.session.post(self.config['api_verify'])
+        ret = self.session.post(self.config['api_verify'] % self.randNumber)
         with open('./verify.png', 'wb') as f:
             f.write(ret.content)
 
     def request(self, params):
-        url = self._combine_url(params)
-        ret = self.session.post(url,data=params)
+        url = self.config['prefix'] + '/' + params['controller'] + '/' + params['action']
+        ret = self.session.post(url)
+        return ret.json()
 
+    def create_basic_params(self):
+        return {}
 
-    def _combine_url(self,params):
-        return self.config['prefix'] + '/' + params['controller'] + '/' + params['action']
+    def format_response_data(self, data):
+        return data
