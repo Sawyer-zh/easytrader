@@ -15,5 +15,15 @@
   "balance": {
     "controller": "Assets",
     "action": "GetMyAssests"
+  },
+  "position":{
+    "controller":"Trade",
+    "action":"GetMyStockList",
+    "pgSize":"",
+    "dwc":""
+  },
+  "entrust":{
+    "controller":"Search",
+    "action":"GetOrdersData"
   }
 }
