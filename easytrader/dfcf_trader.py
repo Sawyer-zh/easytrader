@@ -57,6 +57,7 @@ class DFCFTrader(WebTrader):
     def request(self, params):
         url = self.config['prefix'] + '/' + params.pop('controller') + '/' + params.pop('action')
         ret = self.session.post(url, data=params)
+        print(ret.json())
         return ret.json()
 
     def create_basic_params(self):
@@ -71,7 +72,13 @@ class DFCFTrader(WebTrader):
     def check_login_status(self, return_data):
         pass
 
-    def trade(self, stockCode, price, amount, tradeType):
+    def buy(self, stockCode, price=0, amount=0):
+        self._trade(stockCode, price, amount, 'B')
+
+    def sell(self, stockCode, price=0, amount=0):
+        self._trade(stockCode, price, amount, 'S')
+
+    def _trade(self, stockCode, price, amount, tradeType):
         '''
         :param stockCode:  512000
         :param price:   1.012
@@ -85,6 +92,5 @@ class DFCFTrader(WebTrader):
                   'amount': amount
                   }
         ret = self.session.post(self.config['api_trade'], data=params)
-        print(ret.json())
         if ret.json()['Status'] != 0:
             raise TradeError
