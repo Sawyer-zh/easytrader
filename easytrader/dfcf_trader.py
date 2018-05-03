@@ -3,6 +3,7 @@
 import os
 import requests
 import random
+import time
 from .webtrader import WebTrader, NotLoginError, TradeError
 from .helpers import input_verify_code_manual
 
@@ -40,7 +41,9 @@ class DFCFTrader(WebTrader):
             'type': 'Z',
             'holdOnlineIdx': '1'
         }
-        loginRet = self.session.post(self.config['api_login'], data=loginParams)
+        loginRet = self.session.post(
+            self.config['api_login'], data=loginParams)
+        print(loginRet.json())
         if loginRet.json()['Status'] == 0:
             return True
 
@@ -55,9 +58,9 @@ class DFCFTrader(WebTrader):
             f.write(ret.content)
 
     def request(self, params):
-        url = self.config['prefix'] + '/' + params.pop('controller') + '/' + params.pop('action')
+        url = self.config['prefix'] + '/' + \
+            params.pop('controller') + '/' + params.pop('action')
         ret = self.session.post(url, data=params)
-        print(ret.json())
         return ret.json()
 
     def create_basic_params(self):
@@ -73,10 +76,10 @@ class DFCFTrader(WebTrader):
         pass
 
     def buy(self, stockCode, price=0, amount=0):
-        self._trade(stockCode, price, amount, 'B')
+        return self._trade(stockCode, price, amount, 'B')
 
     def sell(self, stockCode, price=0, amount=0):
-        self._trade(stockCode, price, amount, 'S')
+        return self._trade(stockCode, price, amount, 'S')
 
     def _trade(self, stockCode, price, amount, tradeType):
         '''
@@ -92,5 +95,18 @@ class DFCFTrader(WebTrader):
                   'amount': amount
                   }
         ret = self.session.post(self.config['api_trade'], data=params)
+        if ret.json()['Status'] != 0:
+            raise TradeError
+        return ret.json()['Data'][0]['Wtbh']
+
+    def cancelOrder(self, wtbh):
+        '''
+            委托编号
+        '''
+        params = {
+            'delegateDate': time.strftime('%Y%m%d'),
+            'delegeteCode': wtbh,
+        }
+        ret = self.session.post(self.config['api_trade_cancel'], data=params)
         if ret.json()['Status'] != 0:
             raise TradeError

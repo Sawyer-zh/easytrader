@@ -21,6 +21,17 @@ def get_current_price(code):
     return today['price'][0]
 
 
+def checkDone(position, code, wtbh):
+    for _ in range(5):
+        time.sleep(10)
+        currentPosition = get_position(code)
+        if str(position) != str(currentPosition):
+            return
+    user.cancelOrder(wtbh)
+    print('cancel')
+    time.sleep(5)
+
+
 def do_dsz(code, total):
     currentPrice = float(get_current_price(code))
     position = int(get_position(code))
@@ -31,15 +42,15 @@ def do_dsz(code, total):
     print('diff->' + str(diff))
     print('a->' + str(amount))
     if amount > 0:
-        user.sell(code, str(currentPrice), amount * 100)
+        wtbh = user.sell(code, str(currentPrice), amount * 100)
         print('sell')
-        time.sleep(120)
+        checkDone(position, code, wtbh)
     elif amount < -1:
-        user.buy(code, str(currentPrice), (-1 - amount) * 100)
+        wtbh = user.buy(code, str(currentPrice), (-1 - amount) * 100)
         print('buy')
-        time.sleep(120)
+        checkDone(position, code, wtbh)
     else:
-        time.sleep(1)
+        time.sleep(10)
 
 
 if __name__ == '__main__':

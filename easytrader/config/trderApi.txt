@@ -18,6 +18,20 @@ url			: https://tradeh5.eastmoney.com/Trade/SubmitTrade
 					}]
 				}
 
+1.1撤单
+url			:https://tradeh5.eastmoney.com/Trade/CancelOrder
+类型		:POST
+参数		:
+			delegateDate: 20180504
+			delegeteCode: 697				委托编号
+
+		:
+			{
+				"Message":null,
+				"Status":0,
+				"Data":[{"Cdsm":"撤单已报"}]
+			}
+
 2.验证机制 推测 Uuid 传过去即可
 cookie
 Uid 		: 用户id加密生成		ma6slPcP4zv0ezS55bqWSg==
