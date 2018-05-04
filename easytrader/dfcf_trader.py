@@ -95,6 +95,7 @@ class DFCFTrader(WebTrader):
                   'amount': amount
                   }
         ret = self.session.post(self.config['api_trade'], data=params)
+        print(ret.json())
         if ret.json()['Status'] != 0:
             raise TradeError
         return ret.json()['Data'][0]['Wtbh']

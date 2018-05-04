@@ -4,6 +4,7 @@ import pymysql
 import tushare as ts
 import time
 import easytrader
+from threading import Thread
 
 user = easytrader.use('dfcf')
 user.prepare('./dfcf.json')
@@ -51,13 +52,13 @@ class CellTrader(object):
         sql = 'insert into `' + str(self.__code) + '` (expect_amount, \
         price,actual_amount) values (%s,%s,%s)'
         for i in range(self.__level):
-            tmpSql = sql % (100 + (self.__level - i - 1) * 100, self.__start +
+            tmpSql = sql % (500, self.__start +
                             (self.__end - self.__start) / self.__level * i, 0)
             cursor.execute(tmpSql)
         db.commit()
 
     def do(self):
-        while self.__total < self.total:
+        while True:
             today = ts.get_realtime_quotes(self.__code)
             currentPrice = today['price'][0]
             self.__handle(currentPrice)
@@ -75,7 +76,7 @@ class CellTrader(object):
                 for item in data[1:]:
                     if item['actual_amount'] != 0:
                         sql = 'select * from `' + self.__code + \
-                            '` where price =' + str[item['price']]
+                            '` where price =' + str(item['price'])
                         cursor.execute(sql)
                         data = cursor.fetchone()
                         user.sell(self.__code, price, data['actual_amount'])
@@ -87,7 +88,7 @@ class CellTrader(object):
                         print('sell   ' + time.ctime())
                         break
                 else:
-                    if data[0]['actual_amount'] == 0:
+                    if data[0]['actual_amount'] == 0 and self.__total < self.total:
                         sql = 'select * from `' + self.__code + '` where price=' + price
                         cursor.execute(sql)
                         data = cursor.fetchone()
@@ -101,5 +102,9 @@ class CellTrader(object):
 
 
 if __name__ == '__main__':
-    cell = CellTrader(0.84, 0.86, 11, 512000, 1000)
-    cell.do()
+    cell1 = CellTrader(0.84, 0.88, 11, 512000, 10000)
+    cell2 = CellTrader(1.023, 1.050, 11, 501029, 10000)
+    t1 = Thread(target=cell1.do)
+    t2 = Thread(target=cell2.do)
+    t1.start()
+    t2.start()
