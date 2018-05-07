@@ -1,3 +1,4 @@
+# -*-coding:utf-8-*-
 import easytrader
 import tushare as ts
 import math

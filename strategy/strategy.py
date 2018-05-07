@@ -31,10 +31,10 @@ class Strategy (object):
     def trade(self, amount, price):
         if amount > 0:
             print('sell :' + str(int(amount)) + "  ---  " + str(price))
-            return user.sell(self.__code, amount, price)
+            return user.sell(self.__code, price, int(amount))
         elif amount < 0:
             print('buy :' + str(0 - int(amount)) + "  ---  " + str(price))
-            return user.buy(self.__code, 0 - amount, price)
+            return user.buy(self.__code, price, int(0 - amount))
 
     def check(self, wtbh, positon, interval=5):
         ''' check if succeed'''

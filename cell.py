@@ -9,7 +9,7 @@ from threading import Thread
 user = easytrader.use('dfcf')
 user.prepare('./dfcf.json')
 
-db = pymysql.connect('localhost', 'root', 'root', 'test')
+db = pymysql.connect('localhost', 'root', 'root', 'cell')
 cursor = db.cursor(cursor=pymysql.cursors.DictCursor)
 
 
@@ -52,7 +52,7 @@ class CellTrader(object):
         sql = 'insert into `' + str(self.__code) + '` (expect_amount, \
         price,actual_amount) values (%s,%s,%s)'
         for i in range(self.__level):
-            tmpSql = sql % (500, self.__start +
+            tmpSql = sql % (1000, self.__start +
                             (self.__end - self.__start) / self.__level * i, 0)
             cursor.execute(tmpSql)
         db.commit()
@@ -102,9 +102,13 @@ class CellTrader(object):
 
 
 if __name__ == '__main__':
-    cell1 = CellTrader(0.84, 0.88, 11, 512000, 10000)
-    cell2 = CellTrader(1.023, 1.050, 11, 501029, 10000)
-    t1 = Thread(target=cell1.do)
-    t2 = Thread(target=cell2.do)
+    cell = CellTrader(1.0, 0.7, 31, 512000, 100000)
+    cell2 = CellTrader(1.2, 0.9, 60, 501029, 100000)
+    cell3 = CellTrader(1, 0.9, 11, 512980, 10000)
+    t1 = Thread(target=cell.do)
     t1.start()
+    t2 = Thread(target=cell2.do)
     t2.start()
+    t3 = Thread(target=cell3.do)
+    t3.start()
+
