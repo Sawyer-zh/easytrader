@@ -22,6 +22,7 @@ class Strategy (object):
         else:
             wtbh = self.trade(amount, price)
             self.check(wtbh, position)
+        time.sleep(10)
 
     def judge(self):
         '''need to implement by subclass'''
